@@ -5,6 +5,8 @@
   $arrNomes = array("Joao","Leandro","Danrley","Davi","Murilo","Caio","Eduardo");
   $arrNumeros = [];
   $arrFrutas = array("Banana","Laranja","Tomate","Mamao","Jaca","Jabuticaba");
+  $arrComb1 = array("arroz","feijao","macarrao");
+  $arrComb2 = array("5.50","7.20","4.80");
 
   switch ($action) {
     case 'adicionarItensSupermercado':
@@ -115,4 +117,55 @@
 
       break;
 
+    case "mostrarArray":
+
+      $primeiraLista = "<ul>";
+      $segundaLista = "<ul>";
+
+      foreach ($arrComb1 as $produto) {
+        $primeiraLista .= "<li>".  $produto ."</li>";
+      }
+
+      $primeiraLista .= "</ul>";
+
+      foreach ($arrComb2 as $preco) {
+        $segundaLista .= "<li>".  $preco ."</li>";
+      }
+
+      $segundaLista .= "</ul>";
+
+      $resultado = array(
+        "nomes" => $primeiraLista,
+        "precos" => $segundaLista
+      );
+
+      echo json_encode($resultado);
+
+      break;
+    case "mesclarArrays":
+
+      $arrMesclados = array_combine($arrComb1, $arrComb2);
+
+      $resultado = "Produto:  |  Preco: <br>";
+
+      foreach ($arrMesclados as $arrComb1 => $arrComb2) {
+        $resultado .=   $arrComb1 . " | " . $arrComb2 . "<br>";
+      }
+
+      echo $resultado;
+    break;
+
+    case "incluirNovo":
+
+      $arrMesclados = array_combine($arrComb1, $arrComb2);
+
+      $arrMesclados["Bolacha"] = "6.40";
+
+      $resultado = "Produto:  |  Preco: <br>";
+
+      foreach ($arrMesclados as $arrComb1 => $arrComb2) {
+        $resultado .=   $arrComb1 . " | " . $arrComb2 . "<br>";
+      }
+
+      echo $resultado;
   }

@@ -22,6 +22,20 @@
         list-style-type: none;
       }
 
+      #cntCombinacaoArray{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style-type: none;
+      }
+
+      #appCombinacaoArray{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style-type: none;
+      }
+
       hr{
         border: 1px solid black;
         width: 50%;
@@ -105,6 +119,58 @@
             }
           )
         })
+
+        $("#appCombinacaoArray #BtnMostrarArrays").click(function(){
+          $.post(
+            "script.php?action=mostrarArray",
+            function(response){
+              console.log(response);
+              $("#appCombinacaoArray h3").show()
+
+              const arrComb1 = response.nomes;
+              const arrComb2 = response.precos;
+              
+
+              $("#appCombinacaoArray #arrComb1").html(arrComb1)
+              $("#appCombinacaoArray #arrComb2").html(arrComb2)
+
+              $("#appCombinacaoArray #BtnMostrarArrays").hide();
+              $("#appCombinacaoArray #BtnMesclarArrays").show()
+            }, "json"
+          )
+        })
+
+        $("#appCombinacaoArray #BtnMesclarArrays").click(function(){
+          $.post(
+            "script.php?action=mesclarArrays",
+            function(response){
+              console.log(response);
+              
+              $("#appCombinacaoArray #BtnMesclarArrays").hide()
+              $("#appCombinacaoArray #BtnIncluirNovo").show();
+
+              $("#appCombinacaoArray h3").hide();
+              $("#appCombinacaoArray h2").show();
+              $("#appCombinacaoArray #arrComb1").hide();
+              $("#appCombinacaoArray #arrComb2").hide();
+
+              $("#cntCombinacaoArray").html(response)
+            }
+          )
+        })
+
+        $("#appCombinacaoArray #BtnIncluirNovo").click(function(){
+          $.post(
+            "script.php?action=incluirNovo",
+            function(response){
+              console.log(response);
+              
+              $("#appCombinacaoArray #BtnIncluirNovo").hide();
+
+              $("#cntCombinacaoArray").html(response)
+            }
+          )
+        });
       })
 
     </script>
@@ -156,5 +222,21 @@
     <button type="button" id="BtnPesquisaFruta">Pesquisar</button>
     <div id="cntFruta"></div>
   </div>
+
+  <hr>
+
+  <div id="appCombinacaoArray">
+    <h3 hidden>Array 1</h3>
+    <div id="arrComb1"></div>
+    <h3 hidden>Array 2</h3>
+    <div id="arrComb2"></div>
+    <h2 hidden>Arrays Combinadas</h2>
+    <div id="cntCombinacaoArray"></div>
+
+    <button type="button" id="BtnMostrarArrays">Mostrar arrays</button>
+    <button type="button" id="BtnMesclarArrays" hidden>Mesclar arrays</button>
+    <button type="button" id="BtnIncluirNovo" hidden>Incluir novo</button>
+  </div>
+
 </body>
 </html>
