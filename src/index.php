@@ -135,7 +135,7 @@
               $("#appCombinacaoArray #arrComb2").html(arrComb2)
 
               $("#appCombinacaoArray #BtnMostrarArrays").hide();
-              $("#appCombinacaoArray #BtnMesclarArrays").show()
+              $("#appCombinacaoArray #BtnMesclarArrays").show();
             }, "json"
           )
         })
@@ -171,6 +171,87 @@
             }
           )
         });
+
+        $("#appAlunos #BtnMostrarAlunos").click(function(){
+          $.post(
+            "script.php?action=mostrarAlunos",
+            function(response){
+              console.log(response);
+              
+              $("#cntAlunos").html(response)
+              $("#appAlunos #BtnMostrarAlunos").hide();
+              $("#appAlunos #BtnIncluirAluno").show();
+            }
+          )
+        });
+
+        $("#appAlunos #BtnIncluirAluno").click(function(){
+          $.post(
+            "script.php?action=incluirAluno",
+            function(response){
+              console.log(response);
+              
+              $("#cntAlunos").html(response)
+              $("#appAlunos #BtnIncluirAluno").hide();
+              $("#appAlunos #BtnEditarNota").show();
+            }
+          )
+        });
+
+        $("#appAlunos #BtnEditarNota").click(function(){
+          $.post(
+            "script.php?action=editarNota",
+            function(response){
+              console.log(response);
+              
+              $("#cntAlunos").html(response);
+              $("#appAlunos #BtnEditarNota").hide();
+              $("#appAlunos #BtnCalcularMedia").show();
+            }
+          )
+        });
+
+         $("#appAlunos #BtnCalcularMedia").click(function(){
+          $.post(
+            "script.php?action=calcularMedia",
+            function(response){
+              console.log(response);
+              
+              $("#cntAlunos").append(response);
+              $("#appAlunos #BtnCalcularMedia").hide();
+              $("#appAlunos #BtnOrdenarNotas").show();
+              
+            }
+          )
+        });
+
+        $("#appAlunos #BtnOrdenarNotas").click(function(){
+          $.post(
+            "script.php?action=ordenarNotas",
+            function(response){
+              console.log(response);
+              
+              $("#cntAlunos").html(response);
+
+              $("#appAlunos #BtnOrdenarNotas").hide();
+              $("#appAlunos #BtnMaiorQueOito").show();
+            }
+          )
+        })
+
+        $("#appAlunos #BtnMaiorQueOito").click(function(){
+          $.post(
+            "script.php?action=maiorQueOito",
+            function(response){
+              console.log(response);
+              
+              $("#cntAlunos").html(response);
+
+              $("#appAlunos #BtnMaiorQueOito").hide();
+            }
+          )
+        })
+
       })
 
     </script>
@@ -236,6 +317,18 @@
     <button type="button" id="BtnMostrarArrays">Mostrar arrays</button>
     <button type="button" id="BtnMesclarArrays" hidden>Mesclar arrays</button>
     <button type="button" id="BtnIncluirNovo" hidden>Incluir novo</button>
+  </div>
+
+  <hr>
+
+  <div id="appAlunos">
+    <div id="cntAlunos"></div>
+    <button type="button" id="BtnMostrarAlunos">Mostrar alunos</button>
+    <button type="button" id="BtnIncluirAluno" hidden>Incluir aluno</button>
+    <button type="button" id="BtnEditarNota" hidden>Editar nota</button>
+    <button type="button" id="BtnCalcularMedia" hidden>Calcular media</button>
+    <button type="button" id="BtnOrdenarNotas" hidden>Ordenar notas</button>
+    <button type="button" id="BtnMaiorQueOito" hidden>Mostrar maiores que 8</button>
   </div>
 
 </body>

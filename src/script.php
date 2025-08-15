@@ -7,6 +7,13 @@
   $arrFrutas = array("Banana","Laranja","Tomate","Mamao","Jaca","Jabuticaba");
   $arrComb1 = array("arroz","feijao","macarrao");
   $arrComb2 = array("5.50","7.20","4.80");
+  $alunos = [
+    "101" => ["nome" => "Ana", "idade" => 20, "nota" => 8.5],
+    "102" => ["nome" => "Bruno", "idade" => 22, "nota" => 7.0],
+    "103" => ["nome" => "Carla", "idade" => 21, "nota" => 9.2],
+  ];
+  $mediaNotas = 0;
+
 
   switch ($action) {
     case 'adicionarItensSupermercado':
@@ -153,7 +160,7 @@
       }
 
       echo $resultado;
-    break;
+      break;
 
     case "incluirNovo":
 
@@ -168,4 +175,98 @@
       }
 
       echo $resultado;
+      break;
+    case 'mostrarAlunos':
+      
+      $resultado = "Nome | Nota <br>";
+
+      foreach($alunos as $chaveAluno => $infoAluno) {
+        $resultado .= $infoAluno['nome'] . " | " . $infoAluno['nota'] ."<br>";
+      }
+
+      echo $resultado;
+      break;
+    case 'incluirAluno':
+
+      $alunos["104"] = ["nome" => "Leandro", "idade" => 12, "nota" => 6.8];
+
+      $resultado = "Nome | Nota <br>";
+
+      foreach($alunos as $chaveAluno => $infoAluno) {
+        $resultado .= $infoAluno['nome'] . " | " . $infoAluno['nota'] ."<br>";
+      }
+
+      echo $resultado;
+      break;
+
+    case "editarNota":
+      
+      $alunos["104"] = ["nome" => "Leandro", "idade" => 12, "nota" => 6.8];
+
+      $alunos["102"]["nota"] = 6.3;
+
+      $resultado = "Nome | Nota <br>";
+
+      foreach($alunos as $chaveAluno => $infoAluno) {
+        $resultado .= $infoAluno['nome'] . " | " . $infoAluno['nota'] ."<br>";
+      }
+
+      echo $resultado;
+      
+      break;
+
+    case "calcularMedia":
+
+      $alunos["104"] = ["nome" => "Leandro", "idade" => 12, "nota" => 6.8];
+
+      $alunos["102"]["nota"] = 6.3;
+
+      $resultado = "A media dos alunos e: ";
+
+      foreach($alunos as $chaveAluno => $infoAluno) {
+        $media += $infoAluno["nota"];
+      }
+
+      $media = $media/count($alunos);
+
+      $resultado .= $media;
+
+      echo $resultado;
+      break;
+    case "ordenarNotas":
+
+      $alunos["104"] = ["nome" => "Leandro", "idade" => 12, "nota" => 6.8];
+
+      $alunos["102"]["nota"] = 6.3;
+
+      usort($alunos, function($a, $b) {
+        return ($a['nota'] > $b['nota']) ? -1 : 1;
+      });
+
+      $resultado = "Nome | Nota <br>";
+
+      foreach($alunos as $chaveAluno => $infoAluno) {
+        $resultado .= $infoAluno['nome'] . " | " . $infoAluno['nota'] ."<br>";
+      }
+
+      echo $resultado;
+      
+      break;
+    
+    case "maiorQueOito":
+
+      $alunos["104"] = ["nome" => "Leandro", "idade" => 12, "nota" => 6.8];
+
+      $alunos["102"]["nota"] = 6.3;
+
+      $resultado = "Nome | Nota <br>";
+
+      foreach($alunos as $aluno){
+        if($aluno["nota"] > 8) {
+          $resultado .= $aluno['nome'] . " | " . $aluno['nota'] ."<br>";
+        }
+      }
+
+      echo $resultado;
+
   }
