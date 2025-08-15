@@ -92,6 +92,19 @@
             }
           )
         })
+
+        $("#appFrutas #BtnPesquisaFruta").click(function(){
+          $.post(
+            "script.php?action=pesquisaFruta"
+            ,{
+              dsFruta: $("#dsFruta").val()
+            },
+            function(response){
+              console.log(response);
+              $("#cntFruta").html(response)
+            }
+          )
+        })
       })
 
     </script>
@@ -140,6 +153,8 @@
   <div id="appFrutas">
     <label for="dsFruta">Escreva uma fruta</label>
     <input type="text" name="dsFruta" id="dsFruta">
+    <button type="button" id="BtnPesquisaFruta">Pesquisar</button>
+    <div id="cntFruta"></div>
   </div>
 </body>
 </html>

@@ -4,6 +4,7 @@
   $arrSupermercado = array("Leite","Ovo","Carne","Feijao","Refrigerante");
   $arrNomes = array("Joao","Leandro","Danrley","Davi","Murilo","Caio","Eduardo");
   $arrNumeros = [];
+  $arrFrutas = array("Banana","Laranja","Tomate","Mamao","Jaca","Jabuticaba");
 
   switch ($action) {
     case 'adicionarItensSupermercado':
@@ -55,7 +56,7 @@
       $liOrdemInversa = array_reverse($arrNomes);
       $liFinal = "";
 
-      foreach ($arrNomes as $nome) {
+      foreach ($liOrdemInversa as $nome) {
         $liFinal .= "<li> $nome </li>";
       }
 
@@ -99,4 +100,19 @@
       echo "A soma dos numeros pares e de: " . $soma;
 
       break;
+    case "pesquisaFruta":
+
+      $frutaSelecionada = $_POST["dsFruta"];
+      $resultado = "Fruta nao encontrada";
+
+      foreach ($arrFrutas as $indice => $fruta) {
+        if(strtoupper($fruta) == strtoupper($frutaSelecionada)) {
+          $resultado = "Fruta encontrada no indice: " . $indice;
+        }
+      }
+
+      echo $resultado;
+
+      break;
+
   }
