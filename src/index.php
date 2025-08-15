@@ -71,6 +71,27 @@
           )
         })
 
+        $("#appNumeros #BtnMostrarNumeros").click(function(){
+          $.post(
+            "script.php?action=mostrarNumeros",
+            function(response){
+              console.log(response)
+              $("#cntNumeros").html(response)
+            }
+          )
+
+          $("#appNumeros #BtnSomarNumeros").show();
+        })
+
+        $("#appNumeros #BtnSomarNumeros").click(function(){
+          $.post(
+            "script.php?action=somarNumeros",
+            function(response){
+              console.log(response);
+              $("#cntNumeros").html(response);
+            }
+          )
+        })
       })
 
     </script>
@@ -106,5 +127,19 @@
     <button type="button" id="BtnOrdemInversa">Inverterter ordem alfabetica</button>
   </div>
   
+  <hr>
+
+  <div id="appNumeros">
+    <div id="cntNumeros"></div>
+    <button type="button" id="BtnMostrarNumeros">Mostrar numeros pares</button>
+    <button type="button" id="BtnSomarNumeros" hidden>Somar os numeros pares</button>
+  </div>
+
+  <hr>
+
+  <div id="appFrutas">
+    <label for="dsFruta">Escreva uma fruta</label>
+    <input type="text" name="dsFruta" id="dsFruta">
+  </div>
 </body>
 </html>
