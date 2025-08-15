@@ -2,6 +2,8 @@
 
   $action = isset($_GET["action"]) ? $_GET["action"] : "";
   $arrSupermercado = array("Leite","Ovo","Carne","Feijao","Refrigerante");
+  $arrNomes = array("Joao","Leandro","Danrley","Davi","Murilo","Caio","Eduardo");
+
   switch ($action) {
     case 'adicionarItensSupermercado':
       
@@ -33,5 +35,29 @@
 
       echo $liFinal;
 
+      break;
+    case 'ordemAlfabetica':
+
+      asort($arrNomes);
+      $liFinal = "";
+
+      foreach ($arrNomes as $nome) {
+        $liFinal .= "<li> $nome </li>";
+      }
+
+      echo $liFinal;
+      break;
+      
+    case "ordemInversa":
+      
+      asort($arrNomes);
+      $liOrdemInversa = array_reverse($arrNomes);
+      $liFinal = "";
+
+      foreach ($arrNomes as $nome) {
+        $liFinal .= "<li> $nome </li>";
+      }
+
+      echo $liFinal;
       break;
   }

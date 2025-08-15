@@ -8,7 +8,25 @@
 		integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <style></style>
+    <style>
+      body{
+        display: flex;
+        flex-direction: column;
+        align-items: center
+      }
+
+      #ulSupermercado{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style-type: none;
+      }
+
+      hr{
+        border: 1px solid black;
+        width: 50%;
+      }
+    </style>
   
     <script>
       $(function(){
@@ -16,12 +34,9 @@
         $("#appSupermercado #BtnAdicionarItens").click(function() {
           $.post(
             "script.php?action=adicionarItensSupermercado",
-          {
-            blItensAdicionados: $("#blItensAdicionados").val()
-          },
-          function(response, adicionado) {
-            console.log(response);
-            $("#ulSupermercado").html(response)
+            function(response) {
+              console.log(response);
+              $("#ulSupermercado").html(response)
           }
           )
         })
@@ -29,12 +44,29 @@
         $("#appSupermercado #BtnExcluirPrimeiro").click(function() {
           $.post(
             "script.php?action=excluirPrimeiro",
-            {
-              blItensAdicionados: $("#blItensAdicionados").val()
-            },
-            function(response, adicionado) {
+            function(response) {
               console.log(response);
               $("#ulSupermercado").html(response)
+            }
+          )
+        })
+
+        $("#appNomes #BtnOrdemAlfabetica").click(function() {
+          $.post(
+            "script.php?action=ordemAlfabetica",
+            function(response){
+              console.log(response);
+              $("#ulNomes").html(response)
+            }
+          )
+        })
+
+        $("#appNomes #BtnOrdemInversa").click(function() {
+          $.post(
+            "script.php?action=ordemInversa",
+            function(response){
+              console.log(response);
+              $("#ulNomes").html(response)
             }
           )
         })
@@ -56,8 +88,23 @@
     </ul>
     <button type="button" id="BtnAdicionarItens">Adicionar itens</button>
     <button type="button" id="BtnExcluirPrimeiro">Excluir primeiro</button>
-
   </div>
 
+  <hr>
+
+  <div id="appNomes">
+    <ul id="ulNomes">
+      <li>Joao</li>
+      <li>Leandro</li>
+      <li>Danrley</li>
+      <li>Davi</li>
+      <li>Murilo</li>
+      <li>Caio</li>
+      <li>Eduardo</li>
+    </ul>
+    <button type="button" id="BtnOrdemAlfabetica">Ordenar em ordem alfabetica</button>
+    <button type="button" id="BtnOrdemInversa">Inverterter ordem alfabetica</button>
+  </div>
+  
 </body>
 </html>
